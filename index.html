@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>FileMakerを開く</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body style="font-family:sans-serif;padding:24px;">
+
+<h2>FileMakerを開く</h2>
+
+<p>下のボタンを押してください。</p>
+
+<a id="fmButton"
+   href="#"
+   style="
+      display:inline-block;
+      padding:14px 24px;
+      background:#007bff;
+      color:white;
+      text-decoration:none;
+      border-radius:8px;
+   ">
+   FileMakerを開く
+</a>
+
+<hr>
+
+<div style="margin-top:20px;font-size:12px;color:#666;">
+  <div>Debug:</div>
+  <div id="debug"></div>
+</div>
+
+<script>
+
+  // =========================
+  // URLパラメータ取得
+  // =========================
+
+  const params = new URLSearchParams(window.location.search);
+
+  const id   = params.get("id")   || "";
+  const mode = params.get("mode") || "";
+
+  // =========================
+  // FileMaker設定
+  // =========================
+
+  const server = "fmserver.example.com";
+  const file   = "SalesSystem";
+  const script = "OpenOrder";
+
+  // =========================
+  // FileMakerへ渡すJSON
+  // =========================
+
+  const fmParam = JSON.stringify({
+    id: id,
+    mode: mode
+  });
+
+  // =========================
+  // fmp URL作成
+  // =========================
+
+  const fmpUrl =
+      "fmp://" +
+      server + "/" +
+      encodeURIComponent(file) +
+      "?script=" + encodeURIComponent(script) +
+      "&param=" + encodeURIComponent(fmParam);
+
+  // =========================
+  // ボタンへ設定
+  // =========================
+
+  document.getElementById("fmButton").href = fmpUrl;
+
+  // Debug表示
+  document.getElementById("debug").textContent = fmpUrl;
+
+</script>
+
+</body>
+</html>
