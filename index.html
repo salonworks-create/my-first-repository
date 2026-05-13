@@ -1,7 +1,53 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>FileMakerを開く</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body style="font-family:sans-serif;padding:24px;">
+
+<h2>持出申請を開く</h2>
+
+<p>下のボタンを押してください。</p>
+
+<a id="fmButton"
+   href="#"
+   style="
+      display:inline-block;
+      padding:14px 24px;
+      background:#007bff;
+      color:white;
+      text-decoration:none;
+      border-radius:8px;
+   ">
+   持出申請を開く
+</a>
+
+<hr>
+
+<div style="margin-top:20px;font-size:12px;color:#666;">
+  <div>Debug:</div>
+  <div id="debug" style="word-break:break-all;"></div>
+</div>
+
 <script>
+
+  // =========================
+  // URLパラメータ取得
+  // =========================
+
   const params = new URLSearchParams(window.location.search);
 
+  // 例:
+  // ?uuid=LHFHEGLIHWEGHSLFHWLEUIFHL
+
   const uuid = params.get("uuid") || "";
+
+  // =========================
+  // FileMaker URL生成
+  // =========================
 
   const fmpUrl =
     "fmp://ansei.irca-app.com/" +
@@ -11,6 +57,16 @@
     "&$p_uuid=" +
     encodeURIComponent(uuid);
 
+  // =========================
+  // ボタンへ設定
+  // =========================
+
   document.getElementById("fmButton").href = fmpUrl;
+
+  // Debug表示
   document.getElementById("debug").textContent = fmpUrl;
+
 </script>
+
+</body>
+</html>
