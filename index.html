@@ -1,17 +1,7 @@
 <script>
-
-  // =========================
-  // URLパラメータ取得
-  // =========================
-
   const params = new URLSearchParams(window.location.search);
 
-  // ?uuid=XXXX を取得
   const uuid = params.get("uuid") || "";
-
-  // =========================
-  // FileMaker URL作成
-  // =========================
 
   const fmpUrl =
     "fmp://ansei.irca-app.com/" +
@@ -21,13 +11,6 @@
     "&$p_uuid=" +
     encodeURIComponent(uuid);
 
-  // =========================
-  // ボタンへ設定
-  // =========================
-
   document.getElementById("fmButton").href = fmpUrl;
-
-  // Debug表示
   document.getElementById("debug").textContent = fmpUrl;
-
 </script>
